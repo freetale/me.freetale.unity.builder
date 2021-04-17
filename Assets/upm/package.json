@@ -1,0 +1,26 @@
+{
+  "name": "me.freetale.unity.builder",
+  "version": "0.1.0",
+  "description": "helper for automation build outside unity ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freetale/me.freetale.unity.builder.git"
+  },
+  "keywords": [
+    "unity3d",
+    "builder",
+    "ci",
+    "upm",
+    "unity-package-manager"
+  ],
+  "author": "FreeTale",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freetale/me.freetale.unity.builder/issues"
+  },
+  "homepage": "https://github.com/freetale/me.freetale.unity.builder#readme"
+}

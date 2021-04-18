@@ -1,9 +1,20 @@
 Anchor:
-  
-Targets:
-- Name: windows
-  BuildPlayerOptions:
-    locationPathName: Builds/windows
+  WindowsBuildOption: &WindowsOption
+    locationPathName: Builds/windows/windows.exe
     target: StandaloneWindows
     targetGroup: Standalone
+Targets:
+- Name: default
+  BuildPlayerOptions:
+    <<: *WindowsOption
+- Name: windows
+  BuildPlayerOptions:
+    <<: *WindowsOption
 - Name: android-dev
+  BuildPlayerOptions:
+    locationPathName: Builds/android/android.apk
+    target: Android
+    targetGroup: Android
+    options:
+    - IL2CPP
+    - Development

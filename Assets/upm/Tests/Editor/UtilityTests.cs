@@ -12,7 +12,6 @@ namespace FreeTale.Unity.Builder.Tests
     public class UtilityTests
     {
         [TestCase]
-        //[TestCaseSource(nameof(GetBuildPlayerOptionTestCase))]
         public void GetBuildPlayerOptionTest()
         {
             JObject obj = new JObject

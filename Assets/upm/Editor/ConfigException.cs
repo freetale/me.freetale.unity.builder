@@ -27,7 +27,7 @@ namespace FreeTale.Unity.Builder
     public class UnexpectConfigException : ConfigException
     {
         public UnexpectConfigException() { }
-        public UnexpectConfigException(JToken actual, string property, string expect, JObject context) : base($"unexpect config of '{property}' expect '{expect}' actual '{actual}'", context) { }
+        public UnexpectConfigException(JToken actual, string property, string expect, JObject context) : base($"unexpect config of {property} expect '{expect}' actual '{actual}'", context) { }
         protected UnexpectConfigException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }

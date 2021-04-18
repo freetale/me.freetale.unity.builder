@@ -12,7 +12,7 @@ namespace FreeTale.Unity.Builder
         public JValue Value;
     }
 
-    public struct Target
+    public class Target
     {
         public string Name;
 
@@ -23,16 +23,10 @@ namespace FreeTale.Unity.Builder
         public static Target FromJObject(JObject targetObject)
         {
             Target target = new Target();
-            target.Name = targetObject.Value<string>("name");
+            target.Name = Utility.RequireString(targetObject, "Name");
             target.PropertyEntries = new List<PropertyEntry>();
-            BuildPlayerOptions options = new BuildPlayerOptions();
-            options.locationPathName = "";
-            options.target = BuildTarget.StandaloneWindows;
-            options.targetGroup = BuildTargetGroup.Standalone;
-            options.options = BuildOptions.AllowDebugging;
-            BuildPipeline.BuildPlayer(options);
+            target.BuildPlayerOptions = Utility.ParseBuildPlayerOptions(Utility.RequireObject(targetObject, "BuildPlayerOptions"));
             return target;
         }
-
     }
 }

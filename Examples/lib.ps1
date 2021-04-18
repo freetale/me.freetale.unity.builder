@@ -11,7 +11,7 @@ if ($PROJECT_PATH -eq $null) {
     $PROJECT_PATH=${PWD}
 }
 
-$ARGS = ""
+$ARGS = @()
 if ($BUILD_TARGET -eq $null) {
     echo "BUILD_TARGET not define, ignore"
     if ($CACHE_NAME -eq $null -and $CACHE_PATH -eq $null) {
@@ -20,11 +20,15 @@ if ($BUILD_TARGET -eq $null) {
     }
 } else {
     #build target may help with unity startup time
-    $ARGS = "$ARGS -buildTarget $BUILD_TARGET"
+    $ARGS = $ARGS + "-buildTarget" + $BUILD_TARGET
     if ($CACHE_NAME -eq $null) {
         $CACHE_NAME="Cache/$BUILD_TARGET"
         echo "missing CACHE_NAME set as ${BUILD_TARGET}"
     }
+}
+
+if (-not $($TARGET -eq $null)){
+    $ARGS = $ARGS + "--target=${TARGET}"
 }
 
 if ($CACHE_PATH -eq $null) {
@@ -40,11 +44,6 @@ if (-not $(Test-Path "${PROJECT_PATH}/Assets")) {
     exit(1)
 }
 
-if (Test-Path "${PROJECT_PATH}/Temp") {
-    echo "Temp path exist, are UnityEditor open this project"
-    exit(1)
-}
-
 echo "${CONOLSE_COLOR}swaping library${CONSOLE_RESTORE}"
 if (-not $(Test-Path "${PROJECT_PATH}/Cache")) {
     mkdir "${PROJECT_PATH}/Cache"
@@ -54,7 +53,7 @@ mv "${PROJECT_PATH}/Library" "$TEMP_CACHE_PATH" -ErrorAction SilentlyContinue
 mv "${CACHE_PATH}" "${PROJECT_PATH}/Library" -ErrorAction SilentlyContinue
 
 echo "${CONOLSE_COLOR}Executing unity editor${CONSOLE_RESTORE}"
-&$UNITY_EDITOR_PATH -quit -batchmode -executeMethod "FreeTale.Unity.Builder.Builder.BuildMain" -logFile - -projectPath "$PROJECT_PATH" | Out-Host
+&$UNITY_EDITOR_PATH -quit -batchmode -executeMethod "FreeTale.Unity.Builder.Builder.BuildMain" -logFile - -projectPath "$PROJECT_PATH" $ARGS ${EXTRA_ARGS} | Out-Host
 $UNITY_EXIT_CODE="$LASTEXITCODE"
 
 echo "${CONOLSE_COLOR}swaping library back${CONSOLE_RESTORE}"

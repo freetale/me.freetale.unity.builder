@@ -34,8 +34,8 @@ namespace FreeTale.Unity.Builder
         {
             if (obj.TryGetValue(property, out JToken token))
             {
-                if (token.Type == JTokenType.String)
-                    return token.Value<string>();
+                if (TryParseString(token, out var result))
+                    return result;
                 throw new UnexpectConfigException(token, property, "string", obj);
             }
             throw new UnexpectConfigException(null, property, "string", obj);
@@ -51,10 +51,21 @@ namespace FreeTale.Unity.Builder
         {
             if (obj.TryGetValue(property, out JToken token))
             {
-                if (token.Type == JTokenType.String)
-                    return token.Value<string>();
+                if (TryParseString(token, out var result))
+                    return result;
             }
             return null;
+        }
+
+        internal static bool TryParseString(JToken token, out string result)
+        {
+            if (token != null && token.Type == JTokenType.String)
+            {
+                result = token.Value<string>();
+                return true;
+            }
+            result = default;
+            return false;
         }
 
         public static string[] OptionalStrings(JObject obj, string property)
@@ -64,10 +75,26 @@ namespace FreeTale.Unity.Builder
                 return null;
             }
             JToken values = obj.GetValue(property);
-            return values.Children().Select(i => i.Value<string>()).ToArray();
+            if (values == null)
+            {
+                return null;
+            }
+            List<string> results = new List<string>();
+            foreach (var item in values.Children())
+            {
+                if (TryParseString(item, out var result))
+                {
+                    results.Add(result);
+                }
+                else
+                {
+                    throw new UnexpectConfigException(item, property, "string", (JObject)values);
+                }
+            }
+            return null;
         }
 
-        public static T RequireEnum<T>(JObject obj, string property) where T: struct
+        public static T RequireEnum<T>(JObject obj, string property) where T : struct
         {
             if (obj.TryGetValue(property, out JToken token))
             {
@@ -93,7 +120,7 @@ namespace FreeTale.Unity.Builder
             return default;
         }
 
-        internal static bool TryParseEnum<T>(JToken token, out T result) where T: struct
+        internal static bool TryParseEnum<T>(JToken token, out T result) where T : struct
         {
             if (TryParseEnumInternal(token, typeof(T), out var r))
             {
@@ -142,6 +169,16 @@ namespace FreeTale.Unity.Builder
             }
             result = default;
             return false;
+        }
+
+        public static JObject RequireObject(JObject obj, string property)
+        {
+            var result = obj.GetValue(property);
+            if (result == null)
+            {
+                throw new UnexpectConfigException(result, property, "object", obj);
+            }
+            return (JObject)result;
         }
     }
 }

@@ -18,12 +18,16 @@ namespace FreeTale.Unity.Builder.Tests
             JObject obj = new JObject
             {
                 { "scenes", new JArray("scene1")},
-                { "locationPathName", "path/test.data" }
+                { "locationPathName", "path/test.data" },
+                { "targetGroup", "Standalone" },
+                { "target", 5 }, //BuildTarget.StandaloneWindows
             };
             BuildPlayerOptions expect = new BuildPlayerOptions
             {
                 scenes = new string[] { "scene1" },
                 locationPathName = "path/test.data",
+                targetGroup = BuildTargetGroup.Standalone,
+                target = BuildTarget.StandaloneWindows,
             };
             var actual = Utility.ParseBuildPlayerOptions(obj);
 

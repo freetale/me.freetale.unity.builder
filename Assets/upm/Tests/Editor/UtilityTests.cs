@@ -39,51 +39,6 @@ namespace FreeTale.Unity.Builder.Tests
             Assert.AreEqual(expect.options, actual.options);
         }
 
-        public static object GetBuildPlayerOptionTestCase()
-        {
-            return new object[]{
-                new object[]
-                {
-                    new JObject(new JProperty("scenes", new JArray("scene1"))),
-                    new BuildPlayerOptions{ scenes = new []{ "scene1" }},
-                },
-                new object[]{
-                    new JObject(),
-                    new BuildPlayerOptions{ scenes = null, },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("locationPathName", "path/test.data")),
-                    new BuildPlayerOptions{ locationPathName = "path/test.data" },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("assetBundleManifestPath", "testPath.json")),
-                    new BuildPlayerOptions{ assetBundleManifestPath = "testPath.json" },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("targetGroup", "Standalone")),
-                    new BuildPlayerOptions{ targetGroup = BuildTargetGroup.Standalone },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("target", "StandaloneWindows")),
-                    new BuildPlayerOptions{ target = BuildTarget.StandaloneWindows },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("options", new JArray("AllowDebugging", "AutoRunPlayer"))),
-                    new BuildPlayerOptions{ options = BuildOptions.AllowDebugging | BuildOptions.AutoRunPlayer },
-                },
-                new object[]
-                {
-                    new JObject(new JProperty("options", "AllowDebugging")),
-                    new BuildPlayerOptions{ options = BuildOptions.AllowDebugging },
-                },
-            };
-        }
-
         [Test]
         public void RequireStringError()
         {

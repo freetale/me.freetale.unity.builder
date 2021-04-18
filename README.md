@@ -34,8 +34,8 @@ yq eval --tojson Examples/BuildConfig.yaml > Examples/BuildConfig.json
 ```
 
 # TODO
-[x] build from outside unity
-[x] yaml support (partial)
-[ ] unity project wide configuration
-[ ] support openupm
-[ ] support bash script
+- [x] build from outside unity
+- [x] yaml support (partial)
+- [ ] unity project wide configuration
+- [ ] support openupm
+- [ ] support bash script

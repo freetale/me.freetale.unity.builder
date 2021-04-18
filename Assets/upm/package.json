@@ -22,5 +22,18 @@
   "bugs": {
     "url": "https://github.com/freetale/me.freetale.unity.builder/issues"
   },
-  "homepage": "https://github.com/freetale/me.freetale.unity.builder#readme"
+  "homepage": "https://github.com/freetale/me.freetale.unity.builder#readme",
+  "dependencies": {
+    "jillejr.newtonsoft.json-for-unity": "13.0.102"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.openupm",
+        "jillejr.newtonsoft.json-for-unity"
+      ]
+    }
+  ]
 }

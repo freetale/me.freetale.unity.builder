@@ -1,0 +1,9 @@
+Anchor:
+  
+Targets:
+- Name: windows
+  BuildPlayerOptions:
+    locationPathName: Builds/windows
+    target: StandaloneWindows
+    targetGroup: Standalone
+- Name: android-dev

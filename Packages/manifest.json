@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "com.unity.test-framework": "1.1.24",
+    "com.unity.textmeshpro": "2.1.4",
+    "jillejr.newtonsoft.json-for-unity": "13.0.102"
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.openupm",
+        "jillejr.newtonsoft.json-for-unity"
+      ]
+    }
+  ]
+}

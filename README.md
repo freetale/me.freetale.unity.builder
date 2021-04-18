@@ -1,9 +1,14 @@
 # me.freetale.unity.builder
 helper for automation build outside unity ecosystem
 
-# Installation
+# Prerequisite
+- Unity (with license activated)
+- powershell
 
-Copy `lib.ps1` in Examples to project root
+on windows it may need to change ExecutionPolicy, default not allow run ps1 script
+```
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+```
 
 add this line `.gitignore`
 ```
@@ -22,9 +27,8 @@ $TARGET="windows" # target to build,
 .\Examples\lib.ps1
 ```
 
-
 # Yaml
-this library not support yaml directly but use [yq](https://github.com/mikefarah/yq) to convert yaml to json configuration
+this library not support yaml directly but use [yq](https://github.com/mikefarah/yq) for convert yaml to json configuration
 ```
 yq eval --tojson Examples/BuildConfig.yaml > Examples/BuildConfig.json
 ```

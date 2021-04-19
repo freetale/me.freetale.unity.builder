@@ -9,6 +9,9 @@ Targets:
 - Name: default
   BuildPlayerOptions:
     <<: *WindowsOption
+  ScriptingDefineSymbols:
+  - DEFINE_A
+  - DEFINE_B
 - Name: windows
   BuildPlayerOptions:
     <<: *WindowsOption

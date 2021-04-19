@@ -33,7 +33,7 @@ namespace FreeTale.Unity.Builder
                 Debug.LogError($"cannot find target {RunInfo.Target}, valid target is [{targetNames}]");
                 EditorApplication.Exit(1);
             }
-            target.ApplyStaticProperty();
+            target.ApplyConfigure();
             var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions);
             if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Failed)
             {

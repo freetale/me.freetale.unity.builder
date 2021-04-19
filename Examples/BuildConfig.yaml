@@ -3,6 +3,8 @@ Anchor:
     locationPathName: Builds/windows/windows.exe
     target: StandaloneWindows
     targetGroup: Standalone
+  PlayerSettings:
+    bundleVersion: &bundleVersion "0.2"
 Targets:
 - Name: default
   BuildPlayerOptions:
@@ -18,3 +20,8 @@ Targets:
     options:
     - IL2CPP
     - Development
+  StaticProperties:
+    UnityEditor.PlayerSettings,UnityEditor:
+      bundleVersion: *bundleVersion
+      keystorePass: "my-password"
+      keyaliasPass: "my-password"

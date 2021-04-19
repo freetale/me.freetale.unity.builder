@@ -14,6 +14,7 @@ namespace FreeTale.Unity.Builder
         public static void BuildMain()
         {
             Default.DoAll();
+            
         }
 
         public static Builder Default { get; } = new Builder();
@@ -32,7 +33,13 @@ namespace FreeTale.Unity.Builder
                 Debug.LogError($"cannot find target {RunInfo.Target}, valid target is [{targetNames}]");
                 EditorApplication.Exit(1);
             }
-            BuildPipeline.BuildPlayer(target.BuildPlayerOptions);
+            target.ApplyStaticProperty();
+            var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions);
+            if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Failed)
+            {
+                Debug.LogError("Build operation fail, see log for more details");
+                EditorApplication.Exit(1);
+            }
         }
     }
 }

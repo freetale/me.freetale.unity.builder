@@ -2,8 +2,10 @@
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,6 +39,43 @@ namespace FreeTale.Unity.Builder.Tests
             Assert.AreEqual(expect.target, actual.target);
             Assert.AreEqual(expect.options, actual.options);
         }
+
+        [Test]
+        public void ParseStaticPropertiesTest()
+        {
+            var obj = new JObject(
+                new JProperty("UnityEditor.PlayerSettings,UnityEditor", new JObject(
+                    new JProperty("keystorePass", "test-keystore"))));
+
+            var actual = Utility.ParseStaticProperties(obj);
+            var expectType = typeof(PlayerSettings);
+            StaticProperty expect = new StaticProperty
+            {
+                PropertyInfo = expectType.GetProperty("keystorePass"),
+                Value = "test-keystore",
+            };
+            Assert.AreEqual(1, actual.Count);
+            Assert.AreEqual(expect.PropertyInfo, actual[0].PropertyInfo);
+            Assert.AreEqual(expect.Value, actual[0].Value);
+        }
+
+        [Test]
+        public void ParseStaticPropertyPropertyTest()
+        {
+            JProperty prop = new JProperty("bundleVersionCode", 1);
+            var type = typeof(PlayerSettings.Android);
+            var actual = Utility.ParseStaticPropertyProperty(type, prop);
+            var expectType = typeof(PlayerSettings);
+            StaticProperty expect = new StaticProperty
+            {
+                PropertyInfo = type.GetProperty("bundleVersionCode"),
+                Value = 1,
+            };
+            Assert.AreEqual(expect.PropertyInfo, actual.PropertyInfo);
+            Assert.AreEqual(expect.Value, actual.Value);
+
+        }
+
 
         [Test]
         public void RequireStringError()

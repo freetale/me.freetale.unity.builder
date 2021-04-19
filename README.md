@@ -27,7 +27,42 @@ $TARGET="windows" # target to build,
 .\Examples\lib.ps1
 ```
 
-# Yaml
+# Configuration
+
+BuildConfig.json look like
+```json
+{
+  "Targets": [
+    {
+      "Name": "android-dev",
+      "BuildPlayerOptions": {
+        "locationPathName": "Builds/android/android.apk",
+        "target": "Android",
+        "targetGroup": "Android",
+        "options": [
+          "IL2CPP",
+          "Development"
+        ]
+      },
+      "StaticProperties": {
+        "UnityEditor.PlayerSettings,UnityEditor": {
+          "keystorePass": "my-password",
+          "keyaliasPass": "my-password"
+        }
+      }
+    }
+  ]
+}
+```
+### Targets
+list of define target, when build we need choose one from this list. each target contains 3 fields.
+- `Name` name of target we select from script
+- `BuildPlayerOptions` options pass to `BuildPlayerPipeline` [referance](https://docs.unity3d.com/ScriptReference/BuildPlayerOptions.html)
+- `StaticProperties` static property need to set before build, like `PlayerSettings.keystorePass` which does not remember by unity, name must be [AssemblyQualifiedName](https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=net-5.0#System_Type_AssemblyQualifiedName) like `UnityEditor.PlayerSettings+Android,UnityEditor`
+
+> :warning: Store password in plain text is insecure.
+
+## Yaml
 this library not support yaml directly but use [yq](https://github.com/mikefarah/yq) for convert yaml to json configuration
 ```
 yq eval --tojson Examples/BuildConfig.yaml > Examples/BuildConfig.json

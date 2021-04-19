@@ -13,7 +13,7 @@ namespace FreeTale.Unity.Builder
         public static BuildPlayerOptions ParseBuildPlayerOptions(JObject obj)
         {
             BuildPlayerOptions options = new BuildPlayerOptions();
-            options.scenes = OptionalStrings(obj, nameof(BuildPlayerOptions.scenes));
+            options.scenes = OptionalStrings(obj, nameof(BuildPlayerOptions.scenes))?.ToArray();
             options.locationPathName = RequireString(obj, nameof(BuildPlayerOptions.locationPathName));
             options.assetBundleManifestPath = OptionalString(obj, nameof(BuildPlayerOptions.assetBundleManifestPath));
             options.targetGroup = RequireEnum<BuildTargetGroup>(obj, nameof(BuildPlayerOptions.targetGroup));
@@ -21,6 +21,42 @@ namespace FreeTale.Unity.Builder
             options.options = OptionalEnum<BuildOptions>(obj, nameof(BuildPlayerOptions.options));
 
             return options;
+        }
+
+        public static List<StaticProperty> ParseStaticProperties(JObject obj)
+        {
+            if (obj == null)
+            {
+                return null;
+            }
+            List<StaticProperty> staticProperties = new List<StaticProperty>();
+            foreach (var item in obj.Properties())
+            {
+                staticProperties.AddRange(ParseStaticPropertiesType(item));
+            }
+            return staticProperties;
+        }
+
+        public static IEnumerable<StaticProperty> ParseStaticPropertiesType(JProperty prop)
+        {
+            var type = Type.GetType(prop.Name);
+            var obj = (JObject)prop.Value;
+            return obj.Properties().Select(i => ParseStaticPropertyProperty(type, i));
+        }
+
+        internal static StaticProperty ParseStaticPropertyProperty(Type type, JProperty property)
+        {
+            var propertyInfo = type.GetProperty(property.Name);
+            if (propertyInfo == null)
+            {
+                throw new UnexpectPropertyException(property, type.Name);
+            }
+            var value = property.Value.ToObject(propertyInfo.PropertyType);
+            return new StaticProperty
+            {
+                PropertyInfo = propertyInfo,
+                Value = value,
+            };
         }
 
         /// <summary>
@@ -68,7 +104,7 @@ namespace FreeTale.Unity.Builder
             return false;
         }
 
-        public static string[] OptionalStrings(JObject obj, string property)
+        public static IEnumerable<string> OptionalStrings(JObject obj, string property)
         {
             if (obj == null)
             {
@@ -91,7 +127,7 @@ namespace FreeTale.Unity.Builder
                     throw new UnexpectConfigException(item, property, "string", (JObject)values);
                 }
             }
-            return null;
+            return results;
         }
 
         public static T RequireEnum<T>(JObject obj, string property) where T : struct
@@ -180,5 +216,16 @@ namespace FreeTale.Unity.Builder
             }
             return (JObject)result;
         }
+
+        public static JObject OptionalObject(JObject obj, string property)
+        {
+            var result = obj.GetValue(property);
+            if (result == null)
+            {
+                return null;
+            }
+            return (JObject)result;
+        }
+
     }
 }

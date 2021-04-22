@@ -37,6 +37,11 @@ namespace FreeTale.Unity.Builder
             return staticProperties;
         }
 
+        internal static string[] OptionalStrings(IEnumerable<string> enumerable)
+        {
+            throw new NotImplementedException();
+        }
+
         public static IEnumerable<StaticProperty> ParseStaticPropertiesType(JProperty prop)
         {
             var type = Type.GetType(prop.Name);

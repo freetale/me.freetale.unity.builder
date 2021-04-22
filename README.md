@@ -1,6 +1,8 @@
 # me.freetale.unity.builder
 helper for cli build outside unity ecosystem 
 
+[![openupm](https://img.shields.io/npm/v/me.freetale.unity.builder?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/me.freetale.unity.builder/)
+
 # Prerequisite
 - Unity (with license activated)
 - powershell
@@ -16,7 +18,7 @@ add this line `.gitignore`
 ```
 # Installation
 
-## via package.json
+## a. via package.json
 
 insert dependencies to Packages/manifest.json
 ```json
@@ -38,9 +40,11 @@ insert dependencies to Packages/manifest.json
 }
 ```
 
-## via openupm
+## b. via openupm
 
-TODO: openupm
+```
+openupm add me.freetale.unity.builder
+```
 
 # Usage
 
@@ -75,7 +79,7 @@ $UNITY_EDITOR_PATH="C:/Program Files/Unity/2019.4.24f1/Editor/Unity.exe" #(Requi
 $BUILD_TARGET="Standalone" #(Recommend) unity startup build target, https://docs.unity3d.com/Manual/CommandLineArguments.html
 $PROJECT_PATH=${PWD} #(Optional) default to ${PWD}
 $TARGET="default" # target to build, default to "default"
-./Library/PackageCache/me.freetale.unity.builder@1.0.0/Script/lib.ps1
+./Library/PackageCache/me.freetale.unity.builder@1.0.0/Script/lib.ps1 # may change by version number
 ```
 
 # Configuration
@@ -83,7 +87,7 @@ $TARGET="default" # target to build, default to "default"
 BuildConfig.json require only Target[] object
 
 ### Targets
-list of define target, when build we need choose one from this list. each target contains 3 fields.
+list of define target, when build we need choose one from this list. each target contains 4 fields.
 - `Name` name of target we select from script
 - `BuildPlayerOptions` options pass to `BuildPlayerPipeline` [referance](https://docs.unity3d.com/ScriptReference/BuildPlayerOptions.html)
 - `StaticProperties` static property need to set before build, like `PlayerSettings.keystorePass` which does not remember by unity, name must be [AssemblyQualifiedName](https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=net-5.0#System_Type_AssemblyQualifiedName) like `UnityEditor.PlayerSettings+Android,UnityEditor`
@@ -96,11 +100,19 @@ this library not support yaml directly but use [yq](https://github.com/mikefarah
 yq eval --tojson BuildConfig.yaml > BuildConfig.json
 ```
 
+# Apply Target config
+
+GUI Locate in unity editor
+Window > Build Target
+
+if hit on target button, it will apply to project. useful for debigging.
+
 # TODO
 - [x] build from outside unity
 - [x] yaml support (partial)
 - [x] unity project wide configuration
-- [ ] support openupm
+- [x] support openupm
 - [ ] support bash script
-- [ ] config project as target in editor
-- [ป] script define symbols
+- [x] config project as target in editor
+- [x] script define symbols
+- [ ] set field from command line

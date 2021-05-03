@@ -22,7 +22,6 @@ namespace FreeTale.Unity.Builder
         {
             RunInfo = RunInfo.FromArgs();
             BuildConfig = BuildConfig.FromFile(RunInfo.Config);
-            
         }
 
         private void OnGUI()

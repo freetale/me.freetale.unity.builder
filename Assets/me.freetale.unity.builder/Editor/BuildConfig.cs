@@ -14,18 +14,25 @@ namespace FreeTale.Unity.Builder
 
         public static BuildConfig FromFile(string file)
         {
-            var text = File.ReadAllText(file);
-            var config = JObject.Parse(text);
-            return FromJObject(config);
+            return FromFile(file, null);
         }
 
-        public static BuildConfig FromJObject(JObject obj)
+        public static BuildConfig FromFile(string file, JObject sets)
+        {
+            var text = File.ReadAllText(file);
+            var config = JObject.Parse(text);
+            return FromJObject(config, sets);
+        }
+
+        public static BuildConfig FromJObject(JObject obj, JObject sets)
         {
             var config = new BuildConfig();
             config.Targets = new List<Target>();
-            foreach (var target in obj.GetValue("Targets").Children())
+            JToken targets = obj.GetValue("Targets");
+            foreach (JObject target in targets.Children())
             {
-                config.Targets.Add(Target.FromJObject((JObject)target));
+                target.Merge(sets);
+                config.Targets.Add(Target.FromJObject(target));
             };
             return config;
         }

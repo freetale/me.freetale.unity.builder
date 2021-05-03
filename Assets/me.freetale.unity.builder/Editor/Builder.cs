@@ -25,7 +25,7 @@ namespace FreeTale.Unity.Builder
         {
             RunInfo = RunInfo.FromArgs();
             Debug.Log($"loading config from {RunInfo.Config}");
-            var buildConfig = BuildConfig.FromFile(RunInfo.Config);
+            var buildConfig = BuildConfig.FromFile(RunInfo.Config, RunInfo.ToJObject(RunInfo.Sets));
             var target = buildConfig.Targets.Find(i => i.Name == RunInfo.Target);
             if (target == null)
             {

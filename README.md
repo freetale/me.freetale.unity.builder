@@ -13,7 +13,7 @@ helper for cli build outside unity ecosystem
 - [x] config project as target in editor (for debugging target)
 - [x] build as target in editor (for debugging target)
 - [x] script define symbols
-- [ ] set field from command line
+- [x] set field from command line
 - [x] leave no trace in build
 
 # Prerequisite
@@ -87,8 +87,9 @@ $TARGET="default" # target to build, default to "default"
 # Commandline
 must in form
 `--<command>=<value>` otherwise it will not read by reader.
-`--target` target to build, case-sensitive
-
+`config` config definition to use. default to `BuildConfig.json`
+`target` target to build. default to `default`
+`set` apply json value, before parse json as target level. can be set multiple times
 # Configuration
 BuildConfig.json require only Target[] object. ignore all token doesnot match.
 

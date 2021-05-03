@@ -24,7 +24,7 @@ Targets:
     - IL2CPP
     - Development
   StaticProperties:
-    UnityEditor.PlayerSettings,UnityEditor:
+    PlayerSettings:
       bundleVersion: *bundleVersion
       keystorePass: "my-password"
       keyaliasPass: "my-password"

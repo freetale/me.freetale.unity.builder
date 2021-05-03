@@ -44,6 +44,25 @@ namespace FreeTale.Unity.Builder.Tests
         public void ParseStaticPropertiesTest()
         {
             var obj = new JObject(
+                new JProperty("PlayerSettings", new JObject(
+                    new JProperty("keystorePass", "test-keystore"))));
+
+            var actual = Utility.ParseStaticProperties(obj);
+            var expectType = typeof(PlayerSettings);
+            StaticProperty expect = new StaticProperty
+            {
+                PropertyInfo = expectType.GetProperty("keystorePass"),
+                Value = "test-keystore",
+            };
+            Assert.AreEqual(1, actual.Count);
+            Assert.AreEqual(expect.PropertyInfo, actual[0].PropertyInfo);
+            Assert.AreEqual(expect.Value, actual[0].Value);
+        }
+
+        [Test]
+        public void ParseStaticPropertiesTest2()
+        {
+            var obj = new JObject(
                 new JProperty("UnityEditor.PlayerSettings,UnityEditor", new JObject(
                     new JProperty("keystorePass", "test-keystore"))));
 

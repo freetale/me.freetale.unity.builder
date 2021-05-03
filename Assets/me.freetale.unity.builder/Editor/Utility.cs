@@ -44,7 +44,10 @@ namespace FreeTale.Unity.Builder
 
         public static IEnumerable<StaticProperty> ParseStaticPropertiesType(JProperty prop)
         {
-            var type = Type.GetType(prop.Name);
+            Type type;
+            type = Type.GetType(prop.Name);
+            if (type == null)
+                type = Type.GetType("UnityEditor." + prop.Name + ",UnityEditor");
             var obj = (JObject)prop.Value;
             return obj.Properties().Select(i => ParseStaticPropertyProperty(type, i));
         }

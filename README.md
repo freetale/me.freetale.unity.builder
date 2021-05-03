@@ -11,7 +11,7 @@ helper for cli build outside unity ecosystem
 - [x] support openupm
 - [ ] support bash script
 - [x] config project as target in editor (for debugging target)
-- [ ] build as target in editor (for debugging target)
+- [x] build as target in editor (for debugging target)
 - [x] script define symbols
 - [ ] set field from command line
 - [x] leave no trace in build
@@ -84,18 +84,24 @@ $PROJECT_PATH=${PWD} #(Optional) default to ${PWD}
 $TARGET="default" # target to build, default to "default"
 ./Library/PackageCache/me.freetale.unity.builder@1.0.0/Script/lib.ps1 # may change by version number
 ```
+# Commandline
+must in form
+`--<command>=<value>` otherwise it will not read by reader.
+`--target` target to build, case-sensitive
 
 # Configuration
-
-BuildConfig.json require only Target[] object
+BuildConfig.json require only Target[] object. ignore all token doesnot match.
 
 ### Targets
 list of define target, when build we need choose one from this list. each target contains 4 fields.
 - `Name` name of target we select from script
 - `BuildPlayerOptions` options pass to `BuildPlayerPipeline` [referance](https://docs.unity3d.com/ScriptReference/BuildPlayerOptions.html)
-- `StaticProperties` static property need to set before build, like `PlayerSettings.keystorePass` which does not remember by unity, name must be [AssemblyQualifiedName](https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=net-5.0#System_Type_AssemblyQualifiedName) like `UnityEditor.PlayerSettings+Android,UnityEditor`
+- `StaticProperties` static property need to set before build, see below for more info
 - `ScriptingDefineSymbols` list of define directive as string
 > :warning: Store password in plain text is insecure.
+#### StaticProperties
+static property need to set before build, like `PlayerSettings.keystorePass` which does not remember by unity, name must be [AssemblyQualifiedName](https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=net-5.0#System_Type_AssemblyQualifiedName) like `UnityEditor.PlayerSettings+Android,UnityEditor`
+if first type search not found. it try auto appead `UnityEditor` namespace and assembly. it helpful for more pretty type search
 
 ## Yaml
 this library not support yaml directly but use [yq](https://github.com/mikefarah/yq) for convert yaml to json configuration

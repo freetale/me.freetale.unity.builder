@@ -22,7 +22,6 @@ namespace FreeTale.Unity.Builder
         {
             RunInfo = RunInfo.FromArgs();
             BuildConfig = BuildConfig.FromFile(RunInfo.Config);
-            
         }
 
         private void OnGUI()
@@ -41,12 +40,21 @@ namespace FreeTale.Unity.Builder
                 for (int i = 0; i < BuildConfig.Targets.Count; i++)
                 {
                     var target = BuildConfig.Targets[i];
-                    if (GUILayout.Button(target.Name))
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label(target.Name, GUILayout.Width(EditorGUIUtility.labelWidth));
+                    if (GUILayout.Button("Apply"))
                     {
                         target.ApplyConfigure();
                         AssetDatabase.SaveAssets();
                         Debug.Log($"apply target {target.Name} complete");
                     }
+                    if (GUILayout.Button("Build"))
+                    {
+                        target.ApplyConfigure();
+                        var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions);
+                        Debug.Log($"build end with result {report.summary.result}");
+                    }
+                    GUILayout.EndHorizontal();
                 }
             }
         }

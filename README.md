@@ -3,6 +3,19 @@ helper for cli build outside unity ecosystem
 
 [![openupm](https://img.shields.io/npm/v/me.freetale.unity.builder?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/me.freetale.unity.builder/)
 
+
+# Feature
+- [x] build from outside unity
+- [x] yaml support (partial)
+- [x] unity project wide configuration
+- [x] support openupm
+- [ ] support bash script
+- [x] config project as target in editor (for debugging target)
+- [ ] build as target in editor (for debugging target)
+- [x] script define symbols
+- [ ] set field from command line
+- [x] leave no trace in build
+
 # Prerequisite
 - Unity (with license activated)
 - powershell
@@ -26,17 +39,7 @@ insert dependencies to Packages/manifest.json
   "dependencies": {
     ...
     "me.freetale.unity.builder": "https://github.com/freetale/me.freetale.unity.builder.git?path=Assets/me.freetale.unity.builder"
-  },
-  "scopedRegistries": [
-    {
-      "name": "package.openupm.com",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.openupm",
-        "jillejr.newtonsoft.json-for-unity"
-      ]
-    }
-  ]
+  }
 }
 ```
 
@@ -106,13 +109,3 @@ GUI Locate in unity editor
 Window > Build Target
 
 if hit on target button, it will apply to project. useful for debigging.
-
-# TODO
-- [x] build from outside unity
-- [x] yaml support (partial)
-- [x] unity project wide configuration
-- [x] support openupm
-- [ ] support bash script
-- [x] config project as target in editor
-- [x] script define symbols
-- [ ] set field from command line

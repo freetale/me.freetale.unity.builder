@@ -1,7 +1,7 @@
 {
   "name": "me.freetale.unity.builder",
   "version": "0.2.0",
-  "description": "helper for automation build outside unity ecosystem",
+  "description": "helper for automation build and build profile in and outside unity ecosystem",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

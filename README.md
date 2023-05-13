@@ -1,5 +1,5 @@
 # me.freetale.unity.builder
-helper for cli build outside unity ecosystem 
+helper for config build profile in and outside unity ecosystem 
 
 [![openupm](https://img.shields.io/npm/v/me.freetale.unity.builder?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/me.freetale.unity.builder/)
 
@@ -15,6 +15,7 @@ helper for cli build outside unity ecosystem
 - [x] script define symbols
 - [x] set field from command line
 - [x] leave no trace in build
+- [ ] initial profile for all platform
 
 # Prerequisite
 - Unity (with license activated)
@@ -75,8 +76,7 @@ Create file `BuildConfig.json` in project root
   ]
 }
 ```
-
-Powershell
+### build outside unity with Powershell
 ```ps1
 $UNITY_EDITOR_PATH="C:/Program Files/Unity/2019.4.24f1/Editor/Unity.exe" #(Require) Path to unity installation
 $BUILD_TARGET="Standalone" #(Recommend) unity startup build target, https://docs.unity3d.com/Manual/CommandLineArguments.html
@@ -84,6 +84,12 @@ $PROJECT_PATH=${PWD} #(Optional) default to ${PWD}
 $TARGET="default" # target to build, default to "default"
 ./Library/PackageCache/me.freetale.unity.builder@1.0.0/Script/lib.ps1 # may change by version number
 ```
+### set profile inside unity
+
+see __Window > Build Profile__
+
+![image](Docs/build-target-window.png)
+
 # Commandline
 must in form
 `--<command>=<value>` otherwise it will not read by reader.

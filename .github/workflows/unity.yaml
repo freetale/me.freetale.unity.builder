@@ -43,6 +43,7 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityVersion: 2022.2.13f1
 
       # Build
       - name: Build project
@@ -52,7 +53,8 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: WebGL
+          unityVersion: 2022.2.13f1
+          targetPlatform: StandaloneWindows64
 
       # Output
       - uses: actions/upload-artifact@v2

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -15,6 +16,15 @@ namespace FreeTale.Unity.Builder
         {
             Default.DoAll();
             
+        }
+
+        /// <summary>
+        /// entry point for non unity setting
+        /// </summary>
+        public static void BuildTarget(string target)
+        {
+            Default.DoTarget(target);
+
         }
 
         public static Builder Default { get; } = new Builder();
@@ -41,5 +51,19 @@ namespace FreeTale.Unity.Builder
                 EditorApplication.Exit(1);
             }
         }
+
+        public void DoTarget(string targetString)
+        {
+            RunInfo = RunInfo.FromArgs();
+            var buildConfig = BuildConfig.FromFile(RunInfo.Config, RunInfo.ToJObject(RunInfo.Sets));
+            var target = buildConfig.Targets.Find(i => i.Name == targetString);
+            if (target == null)
+            {
+                var targetNames = string.Join(",", buildConfig.Targets.Select(i => i.Name).ToArray());
+                Debug.LogError($"cannot find target {RunInfo.Target}, valid target is [{targetNames}]");
+                EditorApplication.Exit(1);
+            }
+        }
+
     }
 }

@@ -57,7 +57,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           allowDirtyBuild: true
-          buildMethod: FreeTale.Unity.Builder.Builder.BuildTarget
+          buildMethod: FreeTale.Unity.Builder.Builder.BuildMain
           customParameters: --target=windows
           versioning: Semantic
       # Output

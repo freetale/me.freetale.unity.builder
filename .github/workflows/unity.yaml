@@ -57,6 +57,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           allowDirtyBuild: true
+          customParameters: -executeMethod "FreeTale.Unity.Builder.Builder.BuildMain" --target=windows
 
       # Output
       - uses: actions/upload-artifact@v2

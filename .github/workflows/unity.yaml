@@ -1,6 +1,9 @@
 name: Unity
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -43,7 +46,6 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          unityVersion: auto
 
       # Build
       - name: Build project
@@ -53,8 +55,8 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          unityVersion: auto
           targetPlatform: StandaloneWindows64
+          allowDirtyBuild: true
 
       # Output
       - uses: actions/upload-artifact@v2

@@ -19,7 +19,7 @@ Targets:
     <<: *WindowsOption
     ExtraScriptingDefines:
     - FTBUILDER_JSON
-- Name: "yaml Only"
+- Name: "yaml only"
   BuildPlayerOptions:
     <<: *WindowsOption
     ExtraScriptingDefines:

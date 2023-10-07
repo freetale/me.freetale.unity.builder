@@ -36,7 +36,7 @@
       }
     },
     {
-      "Name": "yaml Only",
+      "Name": "yaml only",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
         "Target": "StandaloneWindows",

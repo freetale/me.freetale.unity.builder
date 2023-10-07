@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 618c3febc5471cc4d9f9937cd026bbb5
+guid: 85f75f133a451be46bd46944aeb3e890
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
   executionOrder: {}
   defineConstraints:
-  - FTBUILDER_JSON
+  - FTBUILDER_YAML
   isPreloaded: 0
   isOverridable: 0
   isExplicitlyReferenced: 1
@@ -21,7 +21,6 @@ PluginImporter:
         Exclude Editor: 0
         Exclude Linux64: 1
         Exclude OSXUniversal: 1
-        Exclude WebGL: 1
         Exclude Win: 1
         Exclude Win64: 1
   - first:

@@ -1,38 +1,25 @@
-# me.freetale.unity.builder
-helper for config build profile in and outside unity ecosystem 
+# Build Profile
+helper for config build profile in and outside unity ecosystem
 
 [![openupm](https://img.shields.io/npm/v/me.freetale.unity.builder?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/me.freetale.unity.builder/)
 
 
 # Feature
+- [x] In Unity Support
+- [ ] Command line support
+- [ ] Ci environment support
 - [x] build from outside unity
-- [x] yaml support (partial)
+- [ ] yaml support
+
 - [x] unity project wide configuration
 - [x] support openupm
 - [ ] support bash script
-- [x] config project as target in editor (for debugging target)
-- [x] build as target in editor (for debugging target)
-- [x] script define symbols
-- [x] set field from command line
+- [ ] example for all platform
 - [x] leave no trace in build
-- [ ] initial profile for all platform
 
-# Prerequisite
-- Unity (with license activated)
-- powershell
-
-on windows it may need to change ExecutionPolicy, default not allow run ps1 script
-```
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
-```
-
-add this line `.gitignore`
-```
-/[Cc]ache/
-```
 # Installation
 
-## a. via package.json
+## 1.a via package.json
 
 insert dependencies to Packages/manifest.json
 ```json
@@ -44,11 +31,15 @@ insert dependencies to Packages/manifest.json
 }
 ```
 
-## b. via openupm
+## 1.b via openupm
 
 ```
 openupm add me.freetale.unity.builder
 ```
+## 2. Enable profile
+add this to script define symbols
+- `FTBUILDER_JSON`
+- `FTBUILDER_YAML`
 
 # Usage
 
@@ -59,9 +50,9 @@ Create file `BuildConfig.json` in project root
     {
       "Name": "default",
       "BuildPlayerOptions": {
-        "locationPathName": "Builds/windows/windows.exe",
-        "target": "StandaloneWindows",
-        "targetGroup": "Standalone"
+        "LocationPathName": "Builds/windows/windows.exe",
+        "Target": "StandaloneWindows",
+        "TargetGroup": "Standalone"
       },
       "StaticProperties": {
         "UnityEditor.PlayerSettings,UnityEditor": {

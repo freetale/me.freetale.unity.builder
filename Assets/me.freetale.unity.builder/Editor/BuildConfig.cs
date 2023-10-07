@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,33 +7,28 @@ using UnityEngine;
 
 namespace FreeTale.Unity.Builder
 {
-    public struct BuildConfig
+    public class BuildConfig
     {
+        public object Anchor; // allow yaml anchor to deserialize
+
         public List<Target> Targets;
 
         public static BuildConfig FromFile(string file)
         {
-            return FromFile(file, null);
-        }
-
-        public static BuildConfig FromFile(string file, JObject sets)
-        {
             var text = File.ReadAllText(file);
-            var config = JObject.Parse(text);
-            return FromJObject(config, sets);
-        }
+#if FTBUILDER_YAML
+            var parser = new YamlDotNet.Core.MergingParser(new YamlDotNet.Core.Parser(new StringReader(text)));
+            var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
+                .IgnoreUnmatchedProperties()
+                .WithTypeConverter(new EnumTypeConverter())
+                .Build();
+            return deserializer.Deserialize<BuildConfig>(parser);
+#elif FTBUILDER_JSON
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<BuildConfig>(text, new FlagConverter());
+#else
 
-        public static BuildConfig FromJObject(JObject obj, JObject sets)
-        {
-            var config = new BuildConfig();
-            config.Targets = new List<Target>();
-            JToken targets = obj.GetValue("Targets");
-            foreach (JObject target in targets.Children())
-            {
-                target.Merge(sets);
-                config.Targets.Add(Target.FromJObject(target));
-            };
-            return config;
+            throw new NotSupportedException("No support type please spacify FTBUILDER_YAML or FTBUILDER_JSON in script define symbols");
+#endif
         }
     }
 }

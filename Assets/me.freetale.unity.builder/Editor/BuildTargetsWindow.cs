@@ -30,7 +30,7 @@ namespace FreeTale.Unity.Builder
             {
                 BuildConfig = BuildConfig.FromFile(RunInfo.Config);
             }
-            if (BuildConfig.Targets == null)
+            if (BuildConfig?.Targets == null)
             {
                 GUILayout.Label($"No target found, setup {RunInfo.Config} for build");
             }
@@ -51,7 +51,7 @@ namespace FreeTale.Unity.Builder
                     if (GUILayout.Button("Build"))
                     {
                         target.ApplyConfigure();
-                        var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions);
+                        var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions.ToEditorOptions());
                         Debug.Log($"build end with result {report.summary.result}");
                     }
                     GUILayout.EndHorizontal();

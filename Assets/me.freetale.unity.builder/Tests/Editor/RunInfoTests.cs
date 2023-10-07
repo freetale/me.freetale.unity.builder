@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,19 +29,5 @@ namespace FreeTale.Unity.Builder.Tests
             Assert.AreEqual(value, actualValue);
         }
 
-        [Test]
-        public void ToJObjectTest()
-        {
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
-            pairs.Add("path.to", "4");
-
-            var actual = RunInfo.ToJObject(pairs);
-
-            var expect = new JObject(
-               new JProperty("path", new JObject(
-                   new JProperty("to", 4))));
-            Assert.AreEqual(expect, actual);
-
-        }
     }
 }

@@ -1,5 +1,6 @@
 {
     "name": "FreeTale.Unity.Builder",
+    "rootNamespace": "FreeTale.Unity.Builder",
     "references": [],
     "includePlatforms": [
         "Editor"
@@ -8,10 +9,17 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "YamlDotNet.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.modules.jsonserialize",
+            "expression": "",
+            "define": ""
+        }
+    ],
     "noEngineReferences": false
 }

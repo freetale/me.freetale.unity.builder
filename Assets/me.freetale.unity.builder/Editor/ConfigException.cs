@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -12,27 +11,14 @@ namespace FreeTale.Unity.Builder
     {
         public ConfigException() { }
 
-        public ConfigException(string message, JContainer context) : base($"{message} at {context.Path}")
+        public ConfigException(string message, string context, string path) : base($"{message} at {path}")
         {
-            Data.Add("context", context.ToString());
+            Data.Add("context", context);
         }
-        public ConfigException(string message, JContainer context, Exception inner) : base($"{message} at {context.Path}", inner)
+        public ConfigException(string message, string context, string path, Exception inner) : base($"{message} at {path}", inner)
         {
-            Data.Add("context", context.ToString());
+            Data.Add("context", context);
         }
         protected ConfigException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-    }
-
-
-    [Serializable]
-    public class UnexpectConfigException : ConfigException
-    {
-        public UnexpectConfigException(JToken actual, string property, string expect, JContainer context) : base($"unexpect config of {property} expect '{expect}' actual '{actual}'", context) { }
-    }
-
-    [Serializable]
-    public class UnexpectPropertyException : ConfigException
-    {
-        public UnexpectPropertyException(JProperty actual, string type) : base($"unexpect config no property {actual.Name} in {type} value '{actual.Value}'", actual.Parent) { }
     }
 }

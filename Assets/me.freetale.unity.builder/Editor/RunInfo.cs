@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -42,7 +41,13 @@ namespace FreeTale.Unity.Builder
         {
             var info = new RunInfo
             {
+#if FTBUILDER_YAML
+                Config = "BuildConfig.yaml",
+#elif FTBUILDER_JSON
                 Config = "BuildConfig.json",
+#else
+                Config = "Missing Support File",
+#endif
                 Target = "default",
                 Sets = new Dictionary<string, string>(),
             };
@@ -84,41 +89,6 @@ namespace FreeTale.Unity.Builder
             name = default;
             value = default;
             return false;
-        }
-
-        public static JObject ToJObject(Dictionary<string,string> sets)
-        {
-            JObject baseObj = new JObject();
-            foreach (var item in sets)
-            {
-                var value = JToken.Parse(item.Value);
-                NewNode(baseObj, item.Key, value);
-            }
-            return baseObj;
-        }
-
-        // code from https://stackoverflow.com/questions/56427214/how-to-add-a-new-jproperty-to-a-json-based-on-path
-        private static JToken NewNode(JObject baseObj, string key, JToken value)
-        {
-            var pathParts = key.Split('.');
-            JToken node = baseObj;
-            for (int i = 0; i < pathParts.Length; i++)
-            {
-                var pathPart = pathParts[i];
-                var partNode = node.SelectToken(pathPart);
-                if (partNode == null && i < pathParts.Length - 1)
-                {
-                    ((JObject)node).Add(pathPart, new JObject());
-                    partNode = node.SelectToken(pathPart);
-                }
-                else if (partNode == null && i == pathParts.Length - 1)
-                {
-                    ((JObject)node).Add(pathPart, value);
-                    partNode = node.SelectToken(pathPart);
-                }
-                node = partNode;
-            }
-            return node;
         }
     }
 }

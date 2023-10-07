@@ -1,28 +1,43 @@
 Anchor:
   WindowsBuildOption: &WindowsOption
-    locationPathName: Builds/windows/windows.exe
-    target: StandaloneWindows
-    targetGroup: Standalone
+    LocationPathName: Builds/windows/windows.exe
+    Target: StandaloneWindows
+    TargetGroup: Standalone
   PlayerSettings:
     bundleVersion: &bundleVersion "0.2"
 Targets:
 - Name: default
   BuildPlayerOptions:
     <<: *WindowsOption
-  ScriptingDefineSymbols:
-  - DEFINE_A
-  - DEFINE_B
+    ExtraScriptingDefines:
+    - DEFINE_A
+    - DEFINE_B
+    - FTBUILDER_JSON
+    - FTBUILDER_YAML
+- Name: "Json only"
+  BuildPlayerOptions:
+    <<: *WindowsOption
+    ExtraScriptingDefines:
+    - FTBUILDER_JSON
+- Name: "Yaml Only"
+  BuildPlayerOptions:
+    <<: *WindowsOption
+    ExtraScriptingDefines:
+    - FTBUILDER_YAML
 - Name: windows
   BuildPlayerOptions:
     <<: *WindowsOption
 - Name: android-dev
   BuildPlayerOptions:
-    locationPathName: Builds/android/android.apk
-    target: Android
-    targetGroup: Android
-    options:
+    LocationPathName: Builds/android/android.apk
+    Target: Android
+    TargetGroup: Android
+    Options:
     - IL2CPP
     - Development
+    ExtraScriptingDefines:
+    - FTBUILDER_JSON
+    - FTBUILDER_YAML
   StaticProperties:
     PlayerSettings:
       bundleVersion: *bundleVersion

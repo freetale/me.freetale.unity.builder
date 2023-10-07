@@ -68,6 +68,15 @@ namespace FreeTale.Unity.Builder
                 var defines = string.Join(";", BuildPlayerOptions.ExtraScriptingDefines);
                 PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildPlayerOptions.TargetGroup, defines);
             }
+            ApplyStaticProperties();
+        }
+
+        private void ApplyStaticProperties()
+        {
+            if (StaticProperties == null)
+            {
+                return;
+            }
             foreach (var classToProperty in StaticProperties)
             {
                 foreach (var prop in classToProperty.Value)

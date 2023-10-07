@@ -14,12 +14,12 @@ Targets:
     - DEFINE_B
     - FTBUILDER_JSON
     - FTBUILDER_YAML
-- Name: "Json only"
+- Name: "json only"
   BuildPlayerOptions:
     <<: *WindowsOption
     ExtraScriptingDefines:
     - FTBUILDER_JSON
-- Name: "Yaml Only"
+- Name: "yaml Only"
   BuildPlayerOptions:
     <<: *WindowsOption
     ExtraScriptingDefines:

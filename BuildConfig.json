@@ -25,7 +25,7 @@
       }
     },
     {
-      "Name": "Json only",
+      "Name": "json only",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
         "Target": "StandaloneWindows",
@@ -36,7 +36,7 @@
       }
     },
     {
-      "Name": "Yaml Only",
+      "Name": "yaml Only",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
         "Target": "StandaloneWindows",

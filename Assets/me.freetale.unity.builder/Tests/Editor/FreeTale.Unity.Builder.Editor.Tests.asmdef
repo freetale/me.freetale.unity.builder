@@ -1,5 +1,6 @@
 {
     "name": "FreeTale.Unity.Builder.Editor.Tests",
+    "rootNamespace": "",
     "references": [
         "FreeTale.Unity.Builder"
     ],
@@ -10,7 +11,8 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Newtonsoft.Json.dll"
+        "Newtonsoft.Json.dll",
+        "YamlDotNet.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

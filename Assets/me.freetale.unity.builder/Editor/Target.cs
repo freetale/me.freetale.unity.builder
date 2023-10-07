@@ -55,9 +55,36 @@ namespace FreeTale.Unity.Builder
         {
             foreach (var prop in kv)
             {
+                ApplyOverride(prop.Key, prop.Value);
+            }
+        }
 
-                this.GetType().GetMember(prop.Key);
-
+        internal void ApplyOverride(string pathKey, object value)
+        {
+            if (pathKey.StartsWith(nameof(BuildPlayerOptions)))
+            {
+                var field = typeof(BuildPlayerOptions).GetField(pathKey.Substring(nameof(BuildPlayerOptions).Length + 1));
+                if (BuildPlayerOptions == null)
+                {
+                    BuildPlayerOptions = new BuildPlayerOptions();
+                }
+                field.SetValue(BuildPlayerOptions, value);
+            }
+            if (pathKey.StartsWith(nameof(StaticProperties)))
+            {
+                var lastIndex = pathKey.LastIndexOf('.');
+                var first = nameof(StaticProperties).Length + 1;
+                var className = pathKey.Substring(first, lastIndex - first).Trim('"');
+                var propertyName = pathKey.Substring(lastIndex + 1);
+                if (StaticProperties == null)
+                {
+                    StaticProperties = new Dictionary<string, Dictionary<string, object>>();
+                }
+                if (!StaticProperties.TryGetValue(className, out var propertyToValue) || propertyToValue == null)
+                {
+                    StaticProperties[className] = new Dictionary<string, object>();
+                }
+                StaticProperties[className][propertyName] = value;
             }
         }
 

@@ -52,17 +52,17 @@ Create file `BuildConfig.json` in project root
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
         "Target": "StandaloneWindows",
-        "TargetGroup": "Standalone"
+        "TargetGroup": "Standalone",
+        "ExtraScriptingDefines": [
+          "DEFINE_A",
+          "DEFINE_B"
+        ]
       },
       "StaticProperties": {
         "UnityEditor.PlayerSettings,UnityEditor": {
           "bundleVersion": "0.2"
         }
-      },
-      "ScriptingDefineSymbols": [
-        "DEFINE_A",
-        "DEFINE_B"
-      ]
+      }
     }
   ]
 }

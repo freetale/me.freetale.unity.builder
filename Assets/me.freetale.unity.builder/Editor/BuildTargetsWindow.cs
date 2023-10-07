@@ -44,13 +44,13 @@ namespace FreeTale.Unity.Builder
                     GUILayout.Label(target.Name, GUILayout.Width(EditorGUIUtility.labelWidth));
                     if (GUILayout.Button("Apply"))
                     {
-                        target.ApplyConfigure();
+                        target.ApplyConfigureForEdit();
                         AssetDatabase.SaveAssets();
                         Debug.Log($"apply target {target.Name} complete");
                     }
                     if (GUILayout.Button("Build"))
                     {
-                        target.ApplyConfigure();
+                        target.ApplyConfigureForBuild();
                         var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions.ToEditorOptions());
                         Debug.Log($"build end with result {report.summary.result}");
                     }

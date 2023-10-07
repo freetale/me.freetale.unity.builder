@@ -61,14 +61,25 @@ namespace FreeTale.Unity.Builder
             }
         }
 
-        public void ApplyConfigure()
+        public void ApplyConfigureForEdit()
         {
-            if (BuildPlayerOptions.ExtraScriptingDefines != null)
-            {
-                var defines = string.Join(";", BuildPlayerOptions.ExtraScriptingDefines);
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildPlayerOptions.TargetGroup, defines);
-            }
+            ApplyScriptDefineSymbols();
             ApplyStaticProperties();
+        }
+        public void ApplyConfigureForBuild()
+        {
+            //ApplyScriptDefineSymbols();
+            ApplyStaticProperties();
+        }
+
+        private void ApplyScriptDefineSymbols()
+        {
+            if (BuildPlayerOptions.ExtraScriptingDefines == null)
+            {
+                return;
+            }
+            var defines = string.Join(";", BuildPlayerOptions.ExtraScriptingDefines);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildPlayerOptions.TargetGroup, defines);
         }
 
         private void ApplyStaticProperties()

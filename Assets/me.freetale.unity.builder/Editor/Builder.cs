@@ -35,7 +35,7 @@ namespace FreeTale.Unity.Builder
                 ExitTargetMissing(buildConfig);
             }
             target.ApplyOverride(RunInfo.Sets);
-            target.ApplyConfigure();
+            target.ApplyConfigureForBuild();
             var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions.ToEditorOptions());
             if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Failed)
             {

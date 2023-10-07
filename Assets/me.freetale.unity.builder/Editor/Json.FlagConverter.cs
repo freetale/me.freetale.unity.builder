@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace FreeTale.Unity.Builder
@@ -21,7 +22,14 @@ namespace FreeTale.Unity.Builder
                     var enumValue = 0;
                     while (value != null)
                     {
-                        enumValue |= (int)Enum.Parse(objectType, value);
+                        if(Enum.TryParse(objectType, value, out var result))
+                        {
+                            enumValue |= (int)result;
+                        }
+                        else
+                        {
+                            throw new Exception($"Can't convert {value} to {objectType.Name} only [{string.Join(", ",Enum.GetNames(objectType))}] can be used");
+                        }
                         value = reader.ReadAsString();
                     }
                     return enumValue;

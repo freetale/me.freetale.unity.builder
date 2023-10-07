@@ -26,7 +26,6 @@ namespace FreeTale.Unity.Builder
 #elif FTBUILDER_JSON
             return Newtonsoft.Json.JsonConvert.DeserializeObject<BuildConfig>(text, new FlagConverter());
 #else
-
             throw new NotSupportedException("No support type please spacify FTBUILDER_YAML or FTBUILDER_JSON in script define symbols");
 #endif
         }

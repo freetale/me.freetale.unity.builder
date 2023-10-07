@@ -18,7 +18,9 @@
         "TargetGroup": "Standalone",
         "ExtraScriptingDefines": [
           "DEFINE_A",
-          "DEFINE_B"
+          "DEFINE_B",
+          "FTBUILDER_JSON",
+          "FTBUILDER_YAML"
         ]
       }
     },
@@ -58,7 +60,9 @@
         "LocationPathName": "Builds/android/android.apk",
         "Target": "Android",
         "TargetGroup": "Android",
-        "Options": "IL2CPP | Development",
+        "Options": [
+          "Development"
+        ],
         "ExtraScriptingDefines": [
           "FTBUILDER_JSON",
           "FTBUILDER_YAML"

@@ -33,7 +33,6 @@ Targets:
     Target: Android
     TargetGroup: Android
     Options:
-    - IL2CPP
     - Development
     ExtraScriptingDefines:
     - FTBUILDER_JSON

@@ -16,15 +16,33 @@ namespace FreeTale.Unity.Builder
 
         public object ReadYaml(IParser parser, Type type)
         {
-            var scalar = parser.Consume<Scalar>();
-            try
+            Scalar scalar;
+            if (parser.TryConsume(out scalar))
             {
-                return Enum.Parse(type, scalar.Value);
+                return ParseEnum(type, scalar);
             }
-            catch (Exception ex)
+            if (parser.TryConsume<SequenceStart>(out _))
             {
-                // Return the default value of the enum if the value is not present in the YAML file.
-                return Enum.GetValues(type).GetValue(0);
+                var enumValue = 0;
+                while (parser.TryConsume(out scalar))
+                {
+                    enumValue |= (int)ParseEnum(type, scalar);
+                }
+                parser.Consume<SequenceEnd>();
+                return enumValue;
+            }
+            throw new Exception($"Can't convert {parser.Current} to {type.Name} only [{string.Join(", ", Enum.GetNames(type))}] can be used");
+        }
+
+        private static object ParseEnum(Type type, Scalar scalar)
+        {
+            if (Enum.TryParse(type, scalar.Value, out var result))
+            {
+                return result;
+            }
+            else
+            {
+                throw new Exception($"Can't convert {scalar} to {type.Name} only [{string.Join(", ", Enum.GetNames(type))}] can be used");
             }
         }
 

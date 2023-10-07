@@ -46,7 +46,7 @@ namespace FreeTale.Unity.Builder
 #elif FTBUILDER_JSON
                 Config = "BuildConfig.json",
 #else
-                Config = "Missing Support File",
+                Config = "Missing Support File. Spacify FTBUILDER_YAML or FTBUILDER_JSON in script define symbols.",
 #endif
                 Target = "default",
                 Sets = new Dictionary<string, string>(),

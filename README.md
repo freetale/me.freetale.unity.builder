@@ -101,12 +101,6 @@ list of define target, when build we need choose one from this list. each target
 static property need to set before build, like `PlayerSettings.keystorePass` which does not remember by unity, name must be [AssemblyQualifiedName](https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=net-5.0#System_Type_AssemblyQualifiedName) like `UnityEditor.PlayerSettings+Android,UnityEditor`
 if first type search not found. it try auto appead `UnityEditor` namespace and assembly. it helpful for more pretty type search
 
-## Yaml
-this library not support yaml directly but use [yq](https://github.com/mikefarah/yq) for convert yaml to json configuration
-```
-yq eval --tojson BuildConfig.yaml > BuildConfig.json
-```
-
 # Apply Target config
 
 GUI Locate in unity editor

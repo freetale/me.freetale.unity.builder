@@ -42,6 +42,11 @@ namespace FreeTale.Unity.Builder
                 Debug.LogError("Build operation fail, see log for more details");
                 EditorApplication.Exit(1);
             }
+            if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Success)
+            {
+                EditorApplication.Exit(0);
+            }
+
         }
 
         private void ExitTargetMissing(BuildConfig buildConfig)

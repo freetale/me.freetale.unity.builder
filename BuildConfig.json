@@ -2,8 +2,11 @@
   "Anchor": {
     "WindowsBuildOption": {
       "LocationPathName": "Builds/windows/windows.exe",
-      "Target": "StandaloneWindows",
-      "TargetGroup": "Standalone"
+      "Target": "StandaloneWindows64",
+      "TargetGroup": "Standalone",
+      "Scenes": [
+        "Assets/Scenes/SampleScene.unity"
+      ]
     },
     "PlayerSettings": {
       "bundleVersion": "0.2"
@@ -14,8 +17,11 @@
       "Name": "default",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
-        "Target": "StandaloneWindows",
+        "Target": "StandaloneWindows64",
         "TargetGroup": "Standalone",
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
         "ExtraScriptingDefines": [
           "DEFINE_A",
           "DEFINE_B",
@@ -25,22 +31,28 @@
       }
     },
     {
-      "Name": "json only",
+      "Name": "json-only",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
-        "Target": "StandaloneWindows",
+        "Target": "StandaloneWindows64",
         "TargetGroup": "Standalone",
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
         "ExtraScriptingDefines": [
           "FTBUILDER_JSON"
         ]
       }
     },
     {
-      "Name": "yaml only",
+      "Name": "yaml-only",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
-        "Target": "StandaloneWindows",
+        "Target": "StandaloneWindows64",
         "TargetGroup": "Standalone",
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
         "ExtraScriptingDefines": [
           "FTBUILDER_YAML"
         ]
@@ -50,8 +62,15 @@
       "Name": "windows",
       "BuildPlayerOptions": {
         "LocationPathName": "Builds/windows/windows.exe",
-        "Target": "StandaloneWindows",
-        "TargetGroup": "Standalone"
+        "Target": "StandaloneWindows64",
+        "TargetGroup": "Standalone",
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
+        "ExtraScriptingDefines": [
+          "DEFINE_A",
+          "DEFINE_B"
+        ]
       }
     },
     {

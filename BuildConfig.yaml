@@ -1,8 +1,10 @@
 Anchor:
   WindowsBuildOption: &WindowsOption
     LocationPathName: Builds/windows/windows.exe
-    Target: StandaloneWindows
+    Target: StandaloneWindows64
     TargetGroup: Standalone
+    Scenes:
+      - Assets/Scenes/SampleScene.unity
   PlayerSettings:
     bundleVersion: &bundleVersion "0.2"
 Targets:
@@ -14,12 +16,12 @@ Targets:
     - DEFINE_B
     - FTBUILDER_JSON
     - FTBUILDER_YAML
-- Name: "json only"
+- Name: "json-only"
   BuildPlayerOptions:
     <<: *WindowsOption
     ExtraScriptingDefines:
     - FTBUILDER_JSON
-- Name: "yaml only"
+- Name: "yaml-only"
   BuildPlayerOptions:
     <<: *WindowsOption
     ExtraScriptingDefines:
@@ -27,6 +29,9 @@ Targets:
 - Name: windows
   BuildPlayerOptions:
     <<: *WindowsOption
+    ExtraScriptingDefines:
+    - DEFINE_A
+    - DEFINE_B
 - Name: android-dev
   BuildPlayerOptions:
     LocationPathName: Builds/android/android.apk

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 namespace FreeTale.Unity.Builder
@@ -16,7 +17,7 @@ namespace FreeTale.Unity.Builder
         public static void BuildMain()
         {
             Default.DoCurrentTarget();
-            
+
         }
 
         public static Builder Default { get; } = new Builder();
@@ -37,16 +38,38 @@ namespace FreeTale.Unity.Builder
             target.ApplyOverride(RunInfo.Sets);
             target.ApplyConfigureForBuild();
             var report = BuildPipeline.BuildPlayer(target.BuildPlayerOptions.ToEditorOptions());
-            if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Failed)
+            WriteResultToConsole(report.summary);
+            if (report.summary.result == BuildResult.Failed)
             {
                 Debug.LogError("Build operation fail, see log for more details");
                 EditorApplication.Exit(1);
             }
-            if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Succeeded)
+            if (report.summary.result == BuildResult.Succeeded)
             {
                 EditorApplication.Exit(0);
             }
 
+        }
+
+        /// <summary>
+        /// reuire for gameci-v3
+        /// </summary>
+        /// <param name="summary"></param>
+        private void WriteResultToConsole(BuildSummary summary)
+        {
+            // This format is required by the game-ci build action
+            Console.WriteLine(
+            $"{Environment.NewLine}" +
+                    $"###########################{Environment.NewLine}" +
+                    $"#      Build results      #{Environment.NewLine}" +
+                    $"###########################{Environment.NewLine}" +
+                    $"{Environment.NewLine}" +
+                    $"Duration: {summary.totalTime}{Environment.NewLine}" +
+                    $"Warnings: {summary.totalWarnings}{Environment.NewLine}" +
+                    $"Errors: {summary.totalErrors}{Environment.NewLine}" +
+                    $"Size: {summary.totalSize} bytes{Environment.NewLine}" +
+                    $"{Environment.NewLine}"
+            );
         }
 
         private void ExitTargetMissing(BuildConfig buildConfig)

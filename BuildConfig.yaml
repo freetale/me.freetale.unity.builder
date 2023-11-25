@@ -43,6 +43,41 @@ Targets:
     - FTBUILDER_JSON
     - FTBUILDER_YAML
   StaticProperties:
+    EditorUserBuildSettings:
+      buildAppBundle: false
+    PlayerSettings:
+      bundleVersion: *bundleVersion
+      keystorePass: "my-password"
+      keyaliasPass: "my-password"
+- Name: android
+  BuildPlayerOptions:
+    LocationPathName: Builds/android/android.aab
+    Target: Android
+    TargetGroup: Android
+    Options: []
+    ExtraScriptingDefines:
+    - FTBUILDER_JSON
+    - FTBUILDER_YAML
+  StaticProperties:
+    EditorUserBuildSettings:
+      buildAppBundle: true
+    PlayerSettings:
+      bundleVersion: *bundleVersion
+      keystorePass: "my-password"
+      keyaliasPass: "my-password"
+- Name: android-export
+  BuildPlayerOptions:
+    LocationPathName: Builds/android-project/
+    Target: Android
+    TargetGroup: Android
+    Options: []
+    ExtraScriptingDefines:
+    - FTBUILDER_JSON
+    - FTBUILDER_YAML
+  StaticProperties:
+    EditorUserBuildSettings:
+      buildAppBundle: true
+      exportAsGoogleAndroidProject: true
     PlayerSettings:
       bundleVersion: *bundleVersion
       keystorePass: "my-password"

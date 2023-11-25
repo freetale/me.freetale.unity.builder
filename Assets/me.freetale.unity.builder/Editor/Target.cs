@@ -120,10 +120,24 @@ namespace FreeTale.Unity.Builder
                 foreach (var prop in classToProperty.Value)
                 {
                     PropertyInfo propertyInfo = GetPropertyInfo(classToProperty.Key, prop.Key);
-                    propertyInfo.SetValue(this, prop.Value, null);
+                    ApplyValue(prop.Value, propertyInfo);
                 }
             }
         }
+
+        private void ApplyValue(object value, PropertyInfo property)
+        {
+            if (property.PropertyType == typeof(bool) && value is string v)
+            {
+                property.SetValue(this, bool.Parse(v), null);
+            }
+            else
+            {
+                property.SetValue(this, value, null);
+            }
+
+        }
+
 
         internal static PropertyInfo GetPropertyInfo(string className, string propertyName)
         {

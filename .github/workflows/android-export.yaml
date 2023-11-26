@@ -76,7 +76,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 6.5
+          gradle-version: 6.9.4
       - name: Run build with Gradle Wrapper
         run: gradle wrapper --project-dir Builds/android-project/ build
       # - name: Bundle 'release' with Gradle

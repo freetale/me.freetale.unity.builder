@@ -3,7 +3,7 @@ Anchor:
     LocationPathName: Builds/windows/windows.exe
     Target: StandaloneWindows64
     TargetGroup: Standalone
-    Scenes:
+    Scenes: &scenes
       - Assets/Scenes/SampleScene.unity
   PlayerSettings:
     bundleVersion: &bundleVersion "0.2"
@@ -39,6 +39,7 @@ Targets:
     TargetGroup: Android
     Options:
     - Development
+    Scenes: *scenes
     ExtraScriptingDefines:
     - FTBUILDER_JSON
     - FTBUILDER_YAML
@@ -55,6 +56,7 @@ Targets:
     Target: Android
     TargetGroup: Android
     Options: []
+    Scenes: *scenes
     ExtraScriptingDefines:
     - FTBUILDER_JSON
     - FTBUILDER_YAML
@@ -71,6 +73,7 @@ Targets:
     Target: Android
     TargetGroup: Android
     Options: []
+    Scenes: *scenes
     ExtraScriptingDefines:
     - FTBUILDER_JSON
     - FTBUILDER_YAML

@@ -82,12 +82,71 @@
         "Options": [
           "Development"
         ],
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
         "ExtraScriptingDefines": [
           "FTBUILDER_JSON",
           "FTBUILDER_YAML"
         ]
       },
       "StaticProperties": {
+        "EditorUserBuildSettings": {
+          "buildAppBundle": false
+        },
+        "PlayerSettings": {
+          "bundleVersion": "0.2",
+          "keystorePass": "my-password",
+          "keyaliasPass": "my-password"
+        }
+      }
+    },
+    {
+      "Name": "android",
+      "BuildPlayerOptions": {
+        "LocationPathName": "Builds/android/android.aab",
+        "Target": "Android",
+        "TargetGroup": "Android",
+        "Options": [],
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
+        "ExtraScriptingDefines": [
+          "FTBUILDER_JSON",
+          "FTBUILDER_YAML"
+        ]
+      },
+      "StaticProperties": {
+        "EditorUserBuildSettings": {
+          "buildAppBundle": true
+        },
+        "PlayerSettings": {
+          "bundleVersion": "0.2",
+          "keystorePass": "my-password",
+          "keyaliasPass": "my-password"
+        }
+      }
+    },
+    {
+      "Name": "android-export",
+      "BuildPlayerOptions": {
+        "LocationPathName": "Builds/android-project/",
+        "Target": "Android",
+        "TargetGroup": "Android",
+        "Options": [],
+        "Scenes": [
+          "Assets/Scenes/SampleScene.unity"
+        ],
+        "ExtraScriptingDefines": [
+          "FTBUILDER_JSON",
+          "FTBUILDER_YAML"
+        ]
+      },
+      "StaticProperties": {
+        "EditorUserBuildSettings": {
+          "buildAppBundle": true,
+          "exportAsGoogleAndroidProject": true
+        },
         "PlayerSettings": {
           "bundleVersion": "0.2",
           "keystorePass": "my-password",

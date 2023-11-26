@@ -78,7 +78,7 @@ jobs:
         with:
           gradle-version: 6.9.4
       - name: Run build with Gradle Wrapper
-        run: gradle wrapper --project-dir Builds/android-project/ build
+        run: chmod 777 Builds/android-project/ && gradle wrapper --project-dir Builds/android-project/ build
       # - name: Bundle 'release' with Gradle
       #   run: ./gradlew bundleRelease
       - name: Sign AAB
